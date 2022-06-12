@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "336919698498",
+    "project_id": "fanstribe-ff",
+    "storage_bucket": "fanstribe-ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336919698498:android:418450aee159f3a038e1db",
+        "android_client_info": {
+          "package_name": "com.fanstribe.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336919698498-8m92deemiqhbmc6us9vfp0s5gc5g32i2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fanstribe.admin",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "336919698498-l0teq53s3dpeu80p19ah52ub7empf784.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGz_JOel-YlhN_kUZ1JzxgI0NEfnnRGJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336919698498-l0teq53s3dpeu80p19ah52ub7empf784.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "336919698498-dqof6ecsr33po042ndap50o1vlkpk77q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.fanstribefans"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336919698498:android:583df28254b14e7438e1db",
+        "android_client_info": {
+          "package_name": "com.fanstribe.fans"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336919698498-decqu3lj3kvdfpgr43so329j56bb42ss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fanstribe.fans",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "336919698498-l0teq53s3dpeu80p19ah52ub7empf784.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGz_JOel-YlhN_kUZ1JzxgI0NEfnnRGJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336919698498-l0teq53s3dpeu80p19ah52ub7empf784.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "336919698498-dqof6ecsr33po042ndap50o1vlkpk77q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.fanstribefans"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

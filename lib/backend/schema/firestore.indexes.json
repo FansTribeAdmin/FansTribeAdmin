@@ -1,0 +1,82 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "celeb_history",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isReviewed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "celeb_history",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isReviewed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isApproved",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "celeb_history",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isApproved",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isReviewed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "change_request",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "history_post_id",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "request_time",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "celebs_post",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isScheduled",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "scheduled_time",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}
