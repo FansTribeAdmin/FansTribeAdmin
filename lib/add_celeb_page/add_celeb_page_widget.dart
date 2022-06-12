@@ -1,12 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
-import '../celeb_list/celeb_list_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../manage_celebs_page/manage_celebs_page_widget.dart';
 import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -367,6 +367,10 @@ class _AddCelebPageWidgetState extends State<AddCelebPageWidget> {
                                     true,
                                     true,
                                   ),
+                                  createdBy: currentUserReference,
+                                  totalFans: 0,
+                                  isActive: false,
+                                  adminCreatedTime: getCurrentTimestamp,
                                 );
                                 var celebsRecordReference =
                                     CelebsRecord.collection.doc();
@@ -377,7 +381,8 @@ class _AddCelebPageWidgetState extends State<AddCelebPageWidget> {
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => CelebListWidget(),
+                                    builder: (context) =>
+                                        ManageCelebsPageWidget(),
                                   ),
                                 );
 

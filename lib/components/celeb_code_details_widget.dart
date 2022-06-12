@@ -131,7 +131,7 @@ class _CelebCodeDetailsWidgetState extends State<CelebCodeDetailsWidget>
                     Expanded(
                       flex: 2,
                       child: Text(
-                        functions.statusLabel(widget.celebCodeRecord),
+                        functions.boolToString(widget.celebCodeRecord.isActive),
                         style: FlutterFlowTheme.of(context).title3,
                       ),
                     ),

@@ -48,6 +48,16 @@ abstract class CelebsRecord
   DocumentReference get createdBy;
 
   @nullable
+  int get totalFans;
+
+  @nullable
+  bool get isActive;
+
+  @nullable
+  @BuiltValueField(wireName: 'admin_created_time')
+  DateTime get adminCreatedTime;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -59,7 +69,9 @@ abstract class CelebsRecord
     ..uid = ''
     ..phoneNumber = ''
     ..postIds = ListBuilder()
-    ..rid = '';
+    ..rid = ''
+    ..totalFans = 0
+    ..isActive = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('celebs');
@@ -92,6 +104,9 @@ Map<String, dynamic> createCelebsRecordData({
   String phoneNumber,
   String rid,
   DocumentReference createdBy,
+  int totalFans,
+  bool isActive,
+  DateTime adminCreatedTime,
 }) =>
     serializers.toFirestore(
         CelebsRecord.serializer,
@@ -105,4 +120,7 @@ Map<String, dynamic> createCelebsRecordData({
           ..phoneNumber = phoneNumber
           ..postIds = null
           ..rid = rid
-          ..createdBy = createdBy));
+          ..createdBy = createdBy
+          ..totalFans = totalFans
+          ..isActive = isActive
+          ..adminCreatedTime = adminCreatedTime));

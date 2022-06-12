@@ -81,12 +81,12 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primaryColor,
+          ? Container(
+              color: FlutterFlowTheme.of(context).primaryColor,
+              child: Builder(
+                builder: (context) => Image.asset(
+                  'assets/images/fanstribe-logo.png',
+                  fit: BoxFit.scaleDown,
                 ),
               ),
             )

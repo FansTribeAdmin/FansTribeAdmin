@@ -19,10 +19,17 @@ bool setCodeStatus(DateTime expiryDate) {
   return false;
 }
 
-String statusLabel(CelebcodeRecord celebcodeRecord) {
+String boolToString(bool booleanValue) {
   // Add your function code here!
-  if (celebcodeRecord.isActive) {
+  if (booleanValue) {
     return 'Active';
   }
   return 'Inactive';
+}
+
+bool canAddCeleb(String roleType) {
+  if (roleType == 'Admin' || roleType == 'Superadmin') {
+    return true;
+  }
+  return false;
 }

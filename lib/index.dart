@@ -22,3 +22,5 @@ export 'add_celeb_post/add_celeb_post_widget.dart' show AddCelebPostWidget;
 export 'view_feed_post/view_feed_post_widget.dart' show ViewFeedPostWidget;
 export 'admin_profile/admin_profile_widget.dart' show AdminProfileWidget;
 export 'add_admin/add_admin_widget.dart' show AddAdminWidget;
+export 'manage_celebs_page/manage_celebs_page_widget.dart'
+    show ManageCelebsPageWidget;

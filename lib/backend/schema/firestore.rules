@@ -10,7 +10,7 @@ service cloud.firestore {
 
     match /celebs/{document} {
       allow create: if request.auth != null;
-      allow read: if true;
+      allow read: if request.auth != null;
       allow write: if request.auth != null;
       allow delete: if false;
     }
@@ -37,10 +37,10 @@ service cloud.firestore {
     }
 
     match /celebcode/{document} {
-      allow create: if true;
+      allow create: if request.auth != null;
       allow read: if true;
-      allow write: if true;
-      allow delete: if true;
+      allow write: if request.auth != null;
+      allow delete: if request.auth != null;
     }
   }
 }

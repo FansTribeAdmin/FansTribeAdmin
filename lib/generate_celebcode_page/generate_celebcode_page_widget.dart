@@ -1,7 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../celebcode_status_page/celebcode_status_page_widget.dart';
-import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -14,7 +13,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GenerateCelebcodePageWidget extends StatefulWidget {
-  const GenerateCelebcodePageWidget({Key key}) : super(key: key);
+  const GenerateCelebcodePageWidget({
+    Key key,
+    this.celebRID,
+  }) : super(key: key);
+
+  final String celebRID;
 
   @override
   _GenerateCelebcodePageWidgetState createState() =>
@@ -24,22 +28,25 @@ class GenerateCelebcodePageWidget extends StatefulWidget {
 class _GenerateCelebcodePageWidgetState
     extends State<GenerateCelebcodePageWidget> {
   DateTime datePicked;
-  String dropDownValue;
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController setCelebCodeController;
+  TextEditingController setCountController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    setCelebCodeController = TextEditingController();
+    setCountController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<CelebsRecord>>(
-      stream: queryCelebsRecord(),
+      stream: queryCelebsRecord(
+        queryBuilder: (celebsRecord) =>
+            celebsRecord.where('rid', isEqualTo: widget.celebRID),
+        singleRecord: true,
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -55,6 +62,14 @@ class _GenerateCelebcodePageWidgetState
         }
         List<CelebsRecord> generateCelebcodePageCelebsRecordList =
             snapshot.data;
+        // Return an empty Container when the document does not exist.
+        if (snapshot.data.isEmpty) {
+          return Container();
+        }
+        final generateCelebcodePageCelebsRecord =
+            generateCelebcodePageCelebsRecordList.isNotEmpty
+                ? generateCelebcodePageCelebsRecordList.first
+                : null;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -75,7 +90,7 @@ class _GenerateCelebcodePageWidgetState
               },
             ),
             title: Text(
-              'Fancode',
+              'Generate Celeb Code',
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'Staid Gothic',
                     color: Colors.white,
@@ -96,35 +111,8 @@ class _GenerateCelebcodePageWidgetState
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 20),
-                    child: FlutterFlowDropDown(
-                      options: generateCelebcodePageCelebsRecordList
-                          .map((e) => e.celebName)
-                          .toList()
-                          .toList(),
-                      onChanged: (val) => setState(() => dropDownValue = val),
-                      width: MediaQuery.of(context).size.width,
-                      height: 60,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .bodyText1
-                          .override(
-                            fontFamily: 'Staid Gothic',
-                            color: FlutterFlowTheme.of(context).customColor2,
-                            useGoogleFonts: false,
-                          ),
-                      hintText: 'Select Celeb',
-                      fillColor: Colors.white,
-                      elevation: 2,
-                      borderColor: FlutterFlowTheme.of(context).customColor2,
-                      borderWidth: 0,
-                      borderRadius: 12,
-                      margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                      hidesUnderline: true,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 20),
                     child: TextFormField(
-                      controller: textController1,
+                      controller: setCelebCodeController,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: 'Set Celebcode',
@@ -156,7 +144,7 @@ class _GenerateCelebcodePageWidgetState
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 20),
                     child: TextFormField(
-                      controller: textController2,
+                      controller: setCountController,
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: 'Set Count',
@@ -232,85 +220,50 @@ class _GenerateCelebcodePageWidgetState
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: StreamBuilder<List<CelebsRecord>>(
-                            stream: queryCelebsRecord(
-                              queryBuilder: (celebsRecord) =>
-                                  celebsRecord.where('celeb_name',
-                                      isEqualTo: dropDownValue),
-                              singleRecord: true,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<CelebsRecord> generateCodeCelebsRecordList =
-                                  snapshot.data;
-                              // Return an empty Container when the document does not exist.
-                              if (snapshot.data.isEmpty) {
-                                return Container();
-                              }
-                              final generateCodeCelebsRecord =
-                                  generateCodeCelebsRecordList.isNotEmpty
-                                      ? generateCodeCelebsRecordList.first
-                                      : null;
-                              return FFButtonWidget(
-                                onPressed: () async {
-                                  final celebcodeCreateData =
-                                      createCelebcodeRecordData(
-                                    code: textController1.text,
-                                    count: int.parse(textController2.text),
-                                    rid: generateCodeCelebsRecord.rid,
-                                    celebName:
-                                        generateCodeCelebsRecord.celebName,
-                                    celebPhotoUrl:
-                                        generateCodeCelebsRecord.photoUrl,
-                                    expiryDate: datePicked,
-                                    createdTime: getCurrentTimestamp,
-                                    isActive:
-                                        functions.setCodeStatus(datePicked),
-                                  );
-                                  await CelebcodeRecord.collection
-                                      .doc()
-                                      .set(celebcodeCreateData);
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          CelebcodeStatusPageWidget(),
-                                    ),
-                                  );
-                                },
-                                text: 'Generate Code',
-                                options: FFButtonOptions(
-                                  width: 130,
-                                  height: 60,
-                                  color:
-                                      FlutterFlowTheme.of(context).customColor1,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Staid Gothic',
-                                        color: Colors.white,
-                                        useGoogleFonts: false,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: 12,
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              final celebcodeCreateData =
+                                  createCelebcodeRecordData(
+                                code: setCelebCodeController.text,
+                                count: int.parse(setCountController.text),
+                                rid: widget.celebRID,
+                                celebName:
+                                    generateCelebcodePageCelebsRecord.celebName,
+                                celebPhotoUrl:
+                                    generateCelebcodePageCelebsRecord.photoUrl,
+                                expiryDate: datePicked,
+                                createdTime: getCurrentTimestamp,
+                                isActive: functions.setCodeStatus(datePicked),
+                              );
+                              await CelebcodeRecord.collection
+                                  .doc()
+                                  .set(celebcodeCreateData);
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CelebcodeStatusPageWidget(),
                                 ),
                               );
                             },
+                            text: 'Generate Code',
+                            options: FFButtonOptions(
+                              width: 130,
+                              height: 60,
+                              color: FlutterFlowTheme.of(context).customColor1,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Staid Gothic',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
+                            ),
                           ),
                         ),
                       ],

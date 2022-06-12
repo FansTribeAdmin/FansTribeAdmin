@@ -46,7 +46,7 @@ abstract class AdminsRecord
   String get communicationEmail;
 
   @nullable
-  DocumentReference get uid;
+  String get uid;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -60,7 +60,8 @@ abstract class AdminsRecord
     ..phoneNumber = ''
     ..roleType = ''
     ..fullName = ''
-    ..communicationEmail = '';
+    ..communicationEmail = ''
+    ..uid = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('admins');
@@ -93,7 +94,7 @@ Map<String, dynamic> createAdminsRecordData({
   String roleType,
   String fullName,
   String communicationEmail,
-  DocumentReference uid,
+  String uid,
 }) =>
     serializers.toFirestore(
         AdminsRecord.serializer,
